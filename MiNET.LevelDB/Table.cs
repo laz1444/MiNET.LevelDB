@@ -154,6 +154,8 @@ namespace MiNET.LevelDB
 				ulong nonShared = reader.ReadVarLong();
 				ulong size = reader.ReadVarLong();
 
+				if (size == 0) continue; //Weird empty keys that looks like Minecraft ignores. So let's do the same ...
+
 				//TODO: This is pretty wrong since it assumes no sharing. However, it works so far.
 				if (shared != 0) throw new Exception($"Got {shared} shared bytes for index block. We can't handle that right now.");
 
